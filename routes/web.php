@@ -23,6 +23,10 @@ Route::get('/reset-password', function () {
     return view('auth.reset-password');
 })->name('password.reset');
 
+Route::post('/logout',function(){
+
+})->name('logout');
+
 Route::get('/request-demo', function () {
     return view('demo.request');
 })->name('demo.request');
@@ -42,3 +46,39 @@ Route::post('/request-demo', function (Request $request) {
 
     return back()->with('success', true);
 })->name('demo.submit');
+
+Route::prefix('student')->name('student.')->group(function () {
+
+    // Dashboard / Personalized Feed
+    Route::get('/dashboard', function () {
+        return view('student.dashboard');
+    })->name('dashboard');
+
+    // Notice Discovery Archive
+    Route::get('/notices', function () {
+        return view('student.notices.index');
+    })->name('notices.index');
+
+    // Single Notice Detail
+    Route::get('/notices/{id}', function ($id) {
+        // You will pass the actual Notice model instance here:
+        // $notice = Notice::findOrFail($id);
+        // return view('student.notices.show', compact('notice'));
+        return view('student.notices.show');
+    })->name('notices.show');
+
+    // Bookmarks Index
+    Route::get('/bookmarks', function () {
+        return view('student.bookmarks.index');
+    })->name('bookmarks.index');
+
+    // Academic Profile Settings
+    Route::get('/profile', function () {
+        return view('student.profile.show');
+    })->name('profile.show');
+
+    Route::post('/profile', function () {
+        // Handle saving academic profile preferences (Faculty, Department, Cohort)
+        return back()->with('status', 'Academic preferences updated successfully.');
+    })->name('profile.update');
+});
