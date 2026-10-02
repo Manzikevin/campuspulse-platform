@@ -23,9 +23,7 @@ Route::get('/reset-password', function () {
     return view('auth.reset-password');
 })->name('password.reset');
 
-Route::post('/logout',function(){
-
-})->name('logout');
+Route::post('/logout', function () {})->name('logout');
 
 Route::get('/request-demo', function () {
     return view('demo.request');
@@ -90,7 +88,7 @@ Route::prefix('student')->name('student.')->group(function () {
 */
 
 Route::prefix('notice-admin')->name('notice-admin.')->group(function () {
-    
+
     // Dashboard / Engagement Analytics Overview
     Route::get('/dashboard', function () {
         return view('notice-admin.dashboard');
@@ -115,7 +113,6 @@ Route::prefix('notice-admin')->name('notice-admin.')->group(function () {
     Route::get('/categories', function () {
         return view('notice-admin.categories.index');
     })->name('categories.index');
-
 });
 
 /*
@@ -125,7 +122,7 @@ Route::prefix('notice-admin')->name('notice-admin.')->group(function () {
 */
 
 Route::prefix('department-staff')->name('dept-staff.')->group(function () {
-    
+
     // Department Announcements Overview / Dashboard
     Route::get('/dashboard', function () {
         return view('department-staff.dashboard');
@@ -155,5 +152,35 @@ Route::prefix('department-staff')->name('dept-staff.')->group(function () {
     Route::get('/resources', function () {
         return view('department-staff.resources.index');
     })->name('resources.index');
+});
 
+
+Route::prefix('super-admin')->name('super-admin.')->group(function () {
+
+    // Dashboard
+    Route::view('/dashboard', 'super-admin.dashboard')->name('dashboard');
+
+    // User Management
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::view('/', 'super-admin.users.index')->name('index');
+        Route::get('/{id}/edit', function ($id) {
+            return view('super-admin.users.edit', ['id' => $id]);
+        })->name('edit');
+        Route::put('/{id}', function ($id) {
+            return redirect()->route('super-admin.users.index')->with('status', "User #{$id} updated successfully.");
+        })->name('update');
+    });
+
+    // System Operations
+    Route::prefix('system')->name('system.')->group(function () {
+        Route::view('/settings', 'super-admin.system.settings')->name('settings');
+        Route::view('/audit-logs', 'super-admin.system.audit-logs')->name('audit-logs');
+    });
+
+    // University Structural Hierarchy
+    Route::prefix('structure')->name('structure.')->group(function () {
+        Route::view('/faculties', 'super-admin.structure.faculties')->name('faculties');
+        Route::view('/departments', 'super-admin.structure.departments')->name('departments');
+        Route::view('/programs', 'super-admin.structure.programs')->name('programs');
+    });
 });
