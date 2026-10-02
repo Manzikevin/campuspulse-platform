@@ -751,15 +751,15 @@ The platform focuses on:
 
 # Final Stack
 
-Laravel 13+
-PHP 8.3+
-Livewire 3
-Alpine.js
-Tailwind CSS v4
-MySQL
-Spatie Permission
-Laravel Reverb
-Laravel Notifications
-Laravel Scout
-Filament (optional)
+1. Laravel 13+
+2. PHP 8.3+
+3. Livewire 3
+4. Alpine.js
+5. Tailwind CSS v4
+6. MySQL
+7. Spatie Permission
+8. Laravel Reverb
+9. Laravel Notifications
+10. Laravel Scout
+11. Filament (optional)
 
