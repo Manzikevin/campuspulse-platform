@@ -117,3 +117,43 @@ Route::prefix('notice-admin')->name('notice-admin.')->group(function () {
     })->name('categories.index');
 
 });
+
+/*
+|--------------------------------------------------------------------------
+| Department Staff Portal Routes (Authenticated + Dept Staff Role)
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('department-staff')->name('dept-staff.')->group(function () {
+    
+    // Department Announcements Overview / Dashboard
+    Route::get('/dashboard', function () {
+        return view('department-staff.dashboard');
+    })->name('dashboard');
+
+    // Notices Submissions Index
+    Route::get('/notices', function () {
+        return view('department-staff.notices.index');
+    })->name('notices.index');
+
+    // Create Draft Notice Form
+    Route::get('/notices/create', function () {
+        return view('department-staff.notices.create');
+    })->name('notices.create');
+
+    // Edit Draft / Pending Notice Form
+    Route::get('/notices/{id}/edit', function ($id) {
+        return view('department-staff.notices.edit');
+    })->name('notices.edit');
+
+    // Multi-tier Approval Queue
+    Route::get('/pending-approvals', function () {
+        return view('department-staff.notices.pending-approvals');
+    })->name('notices.pending-approvals');
+
+    // Academic Documents & Timetables Resources
+    Route::get('/resources', function () {
+        return view('department-staff.resources.index');
+    })->name('resources.index');
+
+});
