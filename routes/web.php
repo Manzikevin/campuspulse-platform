@@ -7,9 +7,17 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return view('landing');
+    return view('auth.login');
 })->name('login');
 
 Route::get('/register', function () {
     return view('landing');
 })->name('register');
+
+Route::get('/forgot-password', function () {
+    return view('auth.forogot-password');
+})->name('password.request');
+
+Route::get('/reset-password', function () {
+    return view('auth.reset-password');
+})->name('password.reset');
