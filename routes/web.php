@@ -82,3 +82,38 @@ Route::prefix('student')->name('student.')->group(function () {
         return back()->with('status', 'Academic preferences updated successfully.');
     })->name('profile.update');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Notice Admin Portal Routes (Authenticated + Notice Admin Role)
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('notice-admin')->name('notice-admin.')->group(function () {
+    
+    // Dashboard / Engagement Analytics Overview
+    Route::get('/dashboard', function () {
+        return view('notice-admin.dashboard');
+    })->name('dashboard');
+
+    // University Notices Management Index
+    Route::get('/notices', function () {
+        return view('notice-admin.notices.index');
+    })->name('notices.index');
+
+    // Create Notice Form
+    Route::get('/notices/create', function () {
+        return view('notice-admin.notices.create');
+    })->name('notices.create');
+
+    // Single Notice Detail / Analytics View
+    Route::get('/notices/{id}', function ($id) {
+        return view('notice-admin.notices.show');
+    })->name('notices.show');
+
+    // Categories & Taxonomies Index
+    Route::get('/categories', function () {
+        return view('notice-admin.categories.index');
+    })->name('categories.index');
+
+});
